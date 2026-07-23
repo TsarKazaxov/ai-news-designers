@@ -1,0 +1,685 @@
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Ai News Designers",
+  "schemaVersion": 1,
+  "description": "Weekly AI news digest for the LBC Designers team — ranked Tools & Workflow and Learning & Career sections first (primary sources only, confidence % shown), World AI News for broader context. Refreshed weekly on Mondays."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI News for Designers</title>
+<style>
+  :root {
+    color-scheme: light;
+    --blue-primary: #0E2AE7;
+    --blue-medium: #4678FE;
+    --blue-tint: #C4E2FE;
+    --green: #02B86F;
+    --slate: #4D557E;
+    --card-gray: #ECEEF2;
+    --blob-blue: #EEF2FF;
+    --text-dark: #0D1B3E;
+    --text-body: #1C2035;
+    --text-muted: #6B7280;
+    --divider: #E0E4F0;
+    --orange: #F77F00;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Poppins', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    background: var(--white);
+    color: var(--text-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 24px 48px; }
+  .hidden { display: none !important; }
+
+  /* Header */
+  header {
+    background: var(--blue-primary);
+    color: var(--white);
+    padding: 28px 24px 34px;
+    position: relative;
+    overflow: hidden;
+  }
+  header .blob {
+    position: absolute;
+    top: -60px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 36px;
+    transform: rotate(18deg);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .logo {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+    opacity: 0.85; margin-bottom: 14px;
+  }
+  h1 { font-size: 26px; font-weight: 700; line-height: 1.25; margin-bottom: 8px; }
+  .subtitle { font-size: 13.5px; opacity: 0.9; max-width: 560px; line-height: 1.5; }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px;
+  }
+  .meta-chip {
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+
+  /* Nav */
+  nav {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding: 18px 0 6px;
+    position: sticky; top: 0;
+    background: var(--white);
+    z-index: 5;
+    border-bottom: 1px solid var(--divider);
+    margin-bottom: 24px;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--text-dark);
+    background: var(--white);
+    border: 1px solid var(--divider);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  nav a:hover { background: var(--blob-blue); }
+
+  .archive-control {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .archive-control label {
+    font-size: 11.5px; font-weight: 700; color: var(--slate);
+  }
+  .archive-control select {
+    font-family: inherit;
+    font-size: 12.5px; font-weight: 600; color: var(--text-dark);
+    border: 1px solid var(--divider);
+    border-radius: 20px;
+    padding: 6px 10px;
+    background: var(--white);
+  }
+
+  .archive-banner {
+    background: var(--blob-blue);
+    border: 1px solid var(--blue-tint);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: var(--text-dark);
+    margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .archive-banner button {
+    font-family: inherit;
+    font-size: 12px; font-weight: 700; color: var(--white);
+    background: var(--blue-medium);
+    border: none; border-radius: 16px;
+    padding: 6px 12px; cursor: pointer;
+  }
+
+  /* Sections */
+  section { margin-bottom: 40px; scroll-margin-top: 70px; }
+  .section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .section-tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px;
+    color: var(--blue-medium); text-transform: uppercase;
+  }
+  .section-tag.slate { color: var(--slate); }
+  h2 { font-size: 19px; font-weight: 700; color: var(--text-dark); }
+  h3.archive-h { font-size: 15px; font-weight: 700; color: var(--text-dark); margin: 22px 0 10px; }
+  .section-note {
+    font-size: 12.5px; color: var(--text-muted); margin: 6px 0 18px; line-height: 1.5; max-width: 640px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-gray);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .rank {
+    flex: 0 0 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--blue-primary);
+    color: var(--white);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 2px;
+  }
+  .card-body { flex: 1; min-width: 0; }
+  .card-title {
+    font-size: 14.5px; font-weight: 700; color: var(--text-dark);
+    margin-bottom: 5px; line-height: 1.35;
+  }
+  .card-summary {
+    font-size: 13px; color: var(--text-body); line-height: 1.55; margin-bottom: 10px;
+  }
+  .card-foot {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .source-link {
+    font-size: 11.5px; font-weight: 600; color: var(--blue-medium);
+    text-decoration: none; border-bottom: 1px solid transparent;
+  }
+  .source-link:hover { border-bottom-color: var(--blue-medium); }
+  .dot { color: var(--divider); font-size: 11px; }
+  .date { font-size: 11.5px; color: var(--text-muted); }
+  .confidence {
+    font-size: 10.5px; font-weight: 700;
+    border-radius: 12px; padding: 3px 9px;
+    color: var(--white);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .conf-high { background: var(--green); }
+  .conf-mid { background: var(--blue-medium); }
+  .conf-low { background: var(--orange); }
+
+  .empty-note {
+    font-size: 12.5px; color: var(--text-muted); font-style: italic;
+    padding: 10px 4px;
+  }
+
+  /* Footer / methodology */
+  footer {
+    border-top: 1px solid var(--divider);
+    padding-top: 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  footer strong { color: var(--text-dark); }
+  .footer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin-top: 12px;
+  }
+  @media (max-width: 640px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .archive-control { margin-left: 0; width: 100%; }
+  }
+  .foot-box {
+    background: var(--blob-blue);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="blob"></div>
+  <div class="header-inner">
+    <div class="logo">LITTLEBIG CONNECTION</div>
+    <h1>AI News for Designers — Weekly Digest</h1>
+    <div class="subtitle">Ranked for the LBC Product Design team: what to try, what to learn, and what's happening in AI more broadly. Primary sources only.</div>
+    <div class="meta-row">
+      <span class="meta-chip" id="last-updated-chip">Last updated: Jul 13, 2026</span>
+      <span class="meta-chip">Next refresh: Monday</span>
+      <span class="meta-chip">Archive: rolling 8 weeks</span>
+      <span class="meta-chip">Distribution: manual — share this link yourself</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav>
+    <a href="#tools">🛠️ Tools &amp; Workflow</a>
+    <a href="#learning">🎓 Learning &amp; Career</a>
+    <a href="#world">🌍 World AI News</a>
+    <a href="#methodology">ℹ️ How this is ranked</a>
+    <div class="archive-control">
+      <label for="archive-select">Viewing:</label>
+      <select id="archive-select"></select>
+    </div>
+  </nav>
+
+  <div id="archive-banner" class="archive-banner hidden">
+    <span>You're viewing the archived digest from <strong id="archive-banner-date"></strong>.</span>
+    <button id="back-to-current-btn" type="button">Back to current</button>
+  </div>
+
+  <div id="current-view">
+
+    <section id="tools">
+      <div class="section-head">
+        <span class="section-tag">01 — Designers first</span>
+      </div>
+      <h2>Tools &amp; Workflow</h2>
+      <div class="section-note">AI updates that change how you actually design — new capabilities in the tools already in your stack.</div>
+      <div id="current-tools-cards"></div>
+    </section>
+
+    <section id="learning">
+      <div class="section-head">
+        <span class="section-tag">02 — Designers first</span>
+      </div>
+      <h2>Learning &amp; Career</h2>
+      <div class="section-note">External courses and certifications worth knowing about — for you or for onboarding others.</div>
+      <div id="current-learning-cards"></div>
+    </section>
+
+    <section id="world">
+      <div class="section-head">
+        <span class="section-tag slate">03 — Context</span>
+      </div>
+      <h2>World AI News</h2>
+      <div class="section-note">The bigger picture — model releases and policy moves shaping the industry, ranked below the designer-specific sections on purpose.</div>
+      <div id="current-world-cards"></div>
+    </section>
+
+  </div>
+
+  <div id="archive-view" class="hidden">
+    <h3 class="archive-h">🛠️ Tools &amp; Workflow</h3>
+    <div id="archive-tools-cards"></div>
+    <h3 class="archive-h">🎓 Learning &amp; Career</h3>
+    <div id="archive-learning-cards"></div>
+    <h3 class="archive-h">🌍 World AI News</h3>
+    <div id="archive-world-cards"></div>
+  </div>
+
+  <footer id="methodology">
+    <strong>How this is ranked</strong> — Tools &amp; Workflow and Learning &amp; Career are shown first because they're the most actionable for a Product Designer's day-to-day craft and growth. World AI News (model releases, policy) is kept for context but ranked lower. Every section is capped at 5 items and limited to primary sources (vendor blogs, official newsrooms, or major outlets) — if a section has fewer than 5 qualifying items in a given week, it's shown short rather than padded with lower-quality sources. Confidence % reflects how directly sourced and corroborated an item is, not a prediction of its long-term importance.
+    <div class="footer-grid">
+      <div class="foot-box">
+        <strong>Refresh &amp; archive</strong><br>
+        Content regenerates weekly (Monday mornings) via a scheduled research pass, which also archives the outgoing week. Use the "Viewing" dropdown above to browse the last 8 weeks.
+      </div>
+      <div class="foot-box">
+        <strong>Sharing this</strong><br>
+        There's no automated send to Teams or Outlook configured. Share this artifact's link yourself with the Designers team.
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script type="application/json" id="history-json">
+[
+  {
+    "date": "2026-07-20",
+    "label": "Jul 20, 2026 (current)",
+    "tools": [
+      {
+        "title": "Figma starts rolling out Code Layers — turn any design layer into live, interactive code",
+        "summary": "The Config 2026 headline feature is now shipping: Code Layers let you convert a design layer into an interactive code layer with one click or a prompt, duplicate it to explore directions side by side, and even import a GitHub repo or local folder into the file. It's rolling out in closed beta over the coming weeks via a waitlist at figma.com/config-betas.",
+        "sources": [
+          { "label": "Figma Blog", "url": "https://www.figma.com/blog/code-on-the-figma-canvas/" },
+          { "label": "Figma Release Notes", "url": "https://www.figma.com/release-notes/" }
+        ],
+        "date": "Jul 2026",
+        "confidence": 90
+      },
+      {
+        "title": "Canva Code 2.0 is now available to everyone — including free accounts",
+        "summary": "Canva's vibe-coding tool for building interactive designs and websites from prompts opened to the whole community. Generation is ~75% faster, there are 50+ new templates plus HTML import, and you can now drop Canva Code into a page, whiteboard or deck. Worth watching if marketing colleagues start shipping interactive assets without a design handoff.",
+        "sources": [
+          { "label": "Canva Newsroom", "url": "https://www.canva.com/newsroom/news/Canva-Code/" },
+          { "label": "VentureBeat", "url": "https://venturebeat.com/technology/canva-launches-code-2-0-offering-ai-website-building-to-every-user-including-free-accounts" }
+        ],
+        "date": "Jul 2026",
+        "confidence": 92
+      }
+    ],
+    "learning": [],
+    "world": [
+      {
+        "title": "Thinking Machines releases Inkling — Mira Murati's lab ships its first open model",
+        "summary": "The startup founded by ex-OpenAI CTO Mira Murati open-sourced Inkling under Apache 2.0: a natively multimodal (text, image, audio, video) mixture-of-experts model with 975B total / ~41B active parameters, tuned for calibrated answers and adjustable 'thinking effort'. Weights are on Hugging Face and the company's Tinker API.",
+        "sources": [
+          { "label": "TechCrunch", "url": "https://techcrunch.com/2026/07/15/thinking-machines-amps-up-its-bet-against-one-size-fits-all-ai-with-its-first-open-model-inkling/" },
+          { "label": "VentureBeat", "url": "https://venturebeat.com/technology/thinking-machines-open-sources-first-multimodal-language-model-inkling-focused-on-low-cost-and-resistance-to-censorship" }
+        ],
+        "date": "Jul 15, 2026",
+        "confidence": 93
+      },
+      {
+        "title": "EU AI Act transparency rules take effect Aug 2 — Commission publishes cybersecurity & AI action plan",
+        "summary": "With the AI Act's transparency and general-purpose-AI obligations becoming applicable on August 2, 2026, the AI Office released a July action plan on cybersecurity and AI and published frontier-AI expert findings (Jul 15). A stakeholder consultation on high-risk-system guidelines is open until Jul 23. Distinct from June's simplification package covered earlier.",
+        "sources": [
+          { "label": "European Commission — AI Act", "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" },
+          { "label": "European Commission Press", "url": "https://ec.europa.eu/commission/presscorner/detail/en/ip_26_1024" }
+        ],
+        "date": "Jul 2026",
+        "confidence": 85
+      },
+      {
+        "title": "Anthropic launches Claude for Teachers — free premium access for US K-12 educators",
+        "summary": "Verified K-12 teachers in the US get free access to premium Claude capabilities, a library of teaching skills, and a connection to evidence-based curricula mapped to standards in all 50 states. Another signal of AI labs pushing directly into education, following moves from OpenAI and Google.",
+        "sources": [
+          { "label": "Anthropic Newsroom", "url": "https://www.anthropic.com/news/claude-for-teachers" }
+        ],
+        "date": "Jul 14, 2026",
+        "confidence": 90
+      }
+    ]
+  },
+  {
+    "date": "2026-07-13",
+    "label": "Jul 13, 2026",
+    "tools": [
+      {
+        "title": "Figma adds parallel AI image edits — no more waiting between generations",
+        "summary": "You can now run multiple AI image edits at the same time from the toolbar and keep designing while they load in the background, with updated loading states and icons to track progress. A small quality-of-life change that removes the one-edit-at-a-time bottleneck from Config's Weave-powered image tools.",
+        "sources": [
+          { "label": "Figma Release Notes", "url": "https://www.figma.com/release-notes/" }
+        ],
+        "date": "Jul 2026",
+        "confidence": 87
+      },
+      {
+        "title": "Adobe puts its Firefly creative agent inside ChatGPT, Claude, Copilot, Gemini and Slack",
+        "summary": "Beyond expanding the agent across Creative Cloud apps, Adobe is now embedding Firefly's creative agent directly into third-party AI chat tools — meaning brand-safe generation and editing can start from wherever you already work. Firefly also gained Elements (reusable characters, objects, locations for consistency) and Projects (asset organization).",
+        "sources": [
+          { "label": "Adobe Newsroom", "url": "https://news.adobe.com/news/2026/06/adobe-unveils-major-expansion" },
+          { "label": "Forbes", "url": "https://www.forbes.com/sites/davidphelan/2026/06/19/adobe-brings-its-firefly-ai-creative-agent-directly-into-chatgpt-and-claude/" }
+        ],
+        "date": "Jun 18–19, 2026",
+        "confidence": 93
+      },
+      {
+        "title": "Canva launches Grow 2.0 — agentic ad creation, publishing and optimization in one flow",
+        "summary": "Announced at Cannes Lions, Grow 2.0 turns a brief into ad creative, launches it, and learns from performance data inside Canva — rolling out first in North America, Australia and the UK. Relevant if your marketing colleagues start producing campaign assets without a design handoff.",
+        "sources": [
+          { "label": "Canva Newsroom", "url": "https://www.canva.com/newsroom/news/canva-grow/" },
+          { "label": "Business Wire", "url": "https://www.businesswire.com/news/home/20260625870253/en/Introducing-Canva-Grow-2.0-Create-Launch-and-Optimize-Ads-in-One-Place" }
+        ],
+        "date": "Jun 25, 2026",
+        "confidence": 92
+      },
+      {
+        "title": "Midjourney V8.1 is now the default model",
+        "summary": "V8.1 became the default on June 10 and is Midjourney's fastest model yet — standard jobs render roughly 4–5× faster than earlier versions, which matters if you use it for moodboards and rapid visual exploration. Image-to-video (5s clips, extendable to 21s) continues to mature alongside.",
+        "sources": [
+          { "label": "Midjourney Updates", "url": "https://www.midjourney.com/updates" },
+          { "label": "Midjourney Docs", "url": "https://docs.midjourney.com/hc/en-us/articles/32199405667853-Version" }
+        ],
+        "date": "Jun 10, 2026",
+        "confidence": 88
+      }
+    ],
+    "learning": [
+      {
+        "title": "OpenAI Academy adds three new courses on applying AI at work",
+        "summary": "New self-paced Academy tracks focused on practical skills: building repeatable AI workflows and applying agents to everyday work tasks — a step up from prompt-basics content and directly usable for design-ops experiments.",
+        "sources": [ { "label": "OpenAI", "url": "https://openai.com/index/academy-courses-applying-ai-at-work/" } ],
+        "date": "Jun 2026",
+        "confidence": 90
+      },
+      {
+        "title": "Anthropic brings five free AI Fluency courses to Coursera",
+        "summary": "Anthropic expanded its learning catalog beyond Claude-specific training with five free AI Fluency courses on Coursera, including tracks for educators, students and nonprofit professionals — co-developed with faculty from Ringling College of Art and Design and released under Creative Commons.",
+        "sources": [
+          { "label": "Anthropic Academy", "url": "https://www.anthropic.com/learn" }
+        ],
+        "date": "Jun–Jul 2026",
+        "confidence": 85
+      },
+      {
+        "title": "Coursera launches five new Professional Certificates, including Canva Essentials",
+        "summary": "Coursera's new certificate slate leans into AI-era skills; the Canva Essentials certificate teaches design and content creation using AI workflows on the platform — worth knowing for junior-designer ramp-up or cross-functional colleagues who want design literacy.",
+        "sources": [ { "label": "Coursera Blog", "url": "https://blog.coursera.org/coursera-launches-five-new-professional-certificates-and-expands-ai-and-human-skills-learning/" } ],
+        "date": "2026",
+        "confidence": 88
+      }
+    ],
+    "world": [
+      {
+        "title": "Google announces Gemini 3.5 — Flash is the new default, Pro rolling out mid-July",
+        "summary": "Gemini 3.5 Flash is now the default model in the Gemini app and AI Mode in Search globally, claiming flagship-level intelligence at 4× the output speed of other frontier models; 3.5 Pro (2M-token context) is expected to reach general availability around July 17.",
+        "sources": [
+          { "label": "Google Blog", "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/" },
+          { "label": "Google DeepMind", "url": "https://deepmind.google/models/gemini/" }
+        ],
+        "date": "Jul 2026",
+        "confidence": 92
+      },
+      {
+        "title": "EU finalizes AI Act simplification package — high-risk deadlines pushed to 2027–2028",
+        "summary": "The Council gave final approval on June 29 (after Parliament's June 16 endorsement) to the Digital Omnibus amendments: obligations for stand-alone high-risk AI systems move from Aug 2, 2026 to Dec 2, 2027, and to Aug 2028 for AI embedded in regulated products. Formal publication is expected before the original Aug 2 deadline.",
+        "sources": [
+          { "label": "Travers Smith", "url": "https://www.traverssmith.com/knowledge/knowledge-container/eu-agrees-to-delay-key-ai-act-compliance-deadlines/" },
+          { "label": "Gibson Dunn", "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/" }
+        ],
+        "date": "Jun 29, 2026",
+        "confidence": 90
+      },
+      {
+        "title": "Qualcomm reportedly in talks to buy AI chipmaker Tenstorrent for up to $10B",
+        "summary": "Reuters and The Information reported acquisition talks valuing Jim Keller's RISC-V AI chip company at $8–10B — a bet on inference hardware outside Nvidia's stack. Treat as unconfirmed: the talks were later publicly downplayed and could fall through.",
+        "sources": [
+          { "label": "Reuters (via Yahoo Finance)", "url": "https://finance.yahoo.com/technology/ai/articles/qualcomm-talks-acquire-ai-chip-230401789.html" },
+          { "label": "The Information", "url": "https://www.theinformation.com/articles/qualcomm-talks-buy-tenstorrent-expand-ai-chip-capabilities" }
+        ],
+        "date": "Jun 15, 2026",
+        "confidence": 80
+      }
+    ]
+  },
+  {
+    "date": "2026-07-09",
+    "label": "Jul 9, 2026",
+    "tools": [
+      {
+        "title": "Figma ships Code Layers, Shaders, 3D Transforms and an upgraded Agent at Config 2026",
+        "summary": "Config 2026 brought code layers on the canvas (clone repos into design files), prompt-to-shader fills, 3D transforms, AI image editing via \"Weave\" tools without leaving the file, generative plugins built by prompting the agent, and an enhanced Figma Agent that connects to Notion, Slack, GitHub and Atlassian.",
+        "sources": [
+          { "label": "Figma Blog", "url": "https://www.figma.com/blog/config-2026-recap/" },
+          { "label": "TechCrunch", "url": "https://techcrunch.com/2026/06/24/figma-adds-code-layers-support-for-animations-more-ai-features-in-new-update/" }
+        ],
+        "date": "Jun 24, 2026",
+        "confidence": 95
+      },
+      {
+        "title": "Adobe's Firefly AI Assistant now runs across Premiere, Illustrator, InDesign and Frame.io",
+        "summary": "One conversational assistant can now build brand kits, product videos and storyboards from a single prompt across the Creative Cloud apps, moving Firefly from a generation tool into something that executes multi-step creative tasks.",
+        "sources": [
+          { "label": "Adobe Newsroom", "url": "https://news.adobe.com/news/2026/04/adobe-new-creative-agent" },
+          { "label": "TechCrunch", "url": "https://techcrunch.com/2026/06/18/adobe-adds-its-ai-assistant-to-premiere-illustrator-and-indesign/" }
+        ],
+        "date": "Apr–Jun 2026",
+        "confidence": 92
+      },
+      {
+        "title": "Google Stitch adds real-time, collaborative AI design agent",
+        "summary": "Stitch (Google Labs) now supports multi-screen generation on an AI-native infinite canvas, voice-driven design critique, and live \"stream and steer\" iteration with a design agent — plus export to developer tools. Free with monthly usage limits.",
+        "sources": [
+          { "label": "Google Blog", "url": "https://blog.google/innovation-and-ai/models-and-research/google-labs/stitch-updates/" }
+        ],
+        "date": "Mar–May 2026",
+        "confidence": 90
+      },
+      {
+        "title": "Google releases Gemini 3.1 Flash Image and Gemini 3 Pro Image",
+        "summary": "Two new image-generation models designers can plug into workflows for mockups, asset variation and rapid visual exploration — priced per million tokens, with Pro aimed at higher-fidelity output.",
+        "sources": [
+          { "label": "Google Blog", "url": "https://blog.google/innovation-and-ai/technology/ai/google-ai-updates-june-2026/" }
+        ],
+        "date": "Jun 30, 2026",
+        "confidence": 93
+      }
+    ],
+    "learning": [
+      {
+        "title": "Anthropic Academy: 16 free courses with certificates",
+        "summary": "Self-paced tracks on AI fluency, API development, Model Context Protocol and agent engineering. No paid Claude subscription required; every course ends with a completion certificate.",
+        "sources": [ { "label": "anthropic.com/learn", "url": "https://www.anthropic.com/learn" } ],
+        "date": "Launched Mar 2, 2026",
+        "confidence": 93
+      },
+      {
+        "title": "OpenAI launches \"AI Foundations\" certification inside ChatGPT",
+        "summary": "A job-skills certification learners complete directly in the ChatGPT interface, with practice tasks and in-context feedback. Piloted with Walmart, John Deere, Lowe's and BCG as part of a plan to certify 10 million Americans by 2030.",
+        "sources": [ { "label": "OpenAI", "url": "https://openai.com/index/openai-certificate-courses/" } ],
+        "date": "Jul 2026",
+        "confidence": 90
+      },
+      {
+        "title": "Google AI Essentials: 5-course specialization, free certificate",
+        "summary": "Covers AI fundamentals, productivity tools, prompting, and responsible use in under 6 hours. Free through Google Skills / Google.org-sponsored access, with a paid Coursera track also available.",
+        "sources": [
+          { "label": "grow.google", "url": "https://grow.google/ai-essentials/" },
+          { "label": "skills.google", "url": "https://www.skills.google/paths/2336" }
+        ],
+        "date": "2026",
+        "confidence": 88
+      },
+      {
+        "title": "Figma's free Education plan now reflects current AI feature set",
+        "summary": "Verified students and educators get a full year of the Professional plan — including Figma's AI design assistant and variable system — at no cost. Useful to know if you're mentoring or mapping out junior-designer ramp-up.",
+        "sources": [ { "label": "Figma Learn Help Center", "url": "https://help.figma.com/hc/en-us/sections/23691657321239-Courses-and-collections" } ],
+        "date": "2026",
+        "confidence": 85
+      },
+      {
+        "title": "IBM refreshes its AI Engineering Professional Certificate on Coursera",
+        "summary": "Updated program covering generative AI, prompt engineering, and building apps with LLMs (GPT, LLaMA, BERT) using Hugging Face, PyTorch, RAG and LangChain — a solid option if you're mapping out a broader AI-engineering learning path alongside design-specific tools.",
+        "sources": [ { "label": "IBM Learning Blog", "url": "https://www.ibm.com/new/training/unlock-your-ai-career-with-the-recently-updated-ibm-ai-engineering-professional-certificate" } ],
+        "date": "2026",
+        "confidence": 87
+      }
+    ],
+    "world": [
+      {
+        "title": "Anthropic launches Claude Sonnet 5, now the default free/pro model",
+        "summary": "Pitched as Anthropic's most agentic Sonnet yet, with performance close to flagship Opus 4.8 at lower cost — plans, uses tools, and runs autonomously at a level that previously needed larger models.",
+        "sources": [ { "label": "anthropic.com/news", "url": "https://www.anthropic.com/news/claude-sonnet-5" } ],
+        "date": "Jun 30, 2026",
+        "confidence": 95
+      },
+      {
+        "title": "OpenAI's GPT-5.6 series (Sol, Terra, Luna) rolls out publicly",
+        "summary": "Three tiers — Sol for hard problems like complex coding, Terra for high-volume business tasks, Luna for fast/cheap everyday work — went from limited preview to public availability on July 9, 2026.",
+        "sources": [ { "label": "OpenAI", "url": "https://openai.com/index/previewing-gpt-5-6-sol/" } ],
+        "date": "Jul 9, 2026",
+        "confidence": 93
+      },
+      {
+        "title": "California signs first-of-its-kind AI deal with Anthropic",
+        "summary": "All state agencies, cities and counties get Claude at a 50% discount plus free workforce training, via a new statewide procurement portal — framed as helping government workers, not replacing them.",
+        "sources": [
+          { "label": "gov.ca.gov", "url": "https://www.gov.ca.gov/2026/06/29/governor-newsom-announces-a-first-of-its-kind-partnership-providing-anthropic-tools-to-state-agencies-and-improving-services-for-californians/" },
+          { "label": "TechCrunch", "url": "https://techcrunch.com/2026/06/29/anthropic-and-gov-newsom-forge-deal-allowing-california-government-to-use-claude-at-half-price/" }
+        ],
+        "date": "Jun 29, 2026",
+        "confidence": 94
+      },
+      {
+        "title": "UN Global Dialogue on AI Governance opens in Geneva",
+        "summary": "Member states began discussing international approaches to AI oversight — early-stage policy talks, but a signal of where regulation may head globally.",
+        "sources": [ { "label": "UN News", "url": "https://news.un.org/en/story/2026/07/1167848" } ],
+        "date": "Jul 6, 2026",
+        "confidence": 88
+      },
+      {
+        "title": "Anthropic launches Claude Science and starts its own drug-discovery program",
+        "summary": "A new AI research workbench for scientists (60+ curated skills/connectors for genomics, proteomics, structural biology and more), alongside an internal push to develop treatments for neglected diseases — notable as AI labs move from tooling into owning R&D pipelines.",
+        "sources": [ { "label": "anthropic.com/news", "url": "https://www.anthropic.com/news/claude-science-ai-workbench" } ],
+        "date": "Jun 30, 2026",
+        "confidence": 92
+      }
+    ]
+  }
+]
+</script>
+
+<script>
+  (function () {
+    var MAX_WEEKS = 8;
+    var history = JSON.parse(document.getElementById('history-json').textContent);
+
+    function confClass(c) { return c >= 90 ? 'conf-high' : (c >= 80 ? 'conf-mid' : 'conf-low'); }
+
+    function cardHtml(item, rank) {
+      var sources = item.sources.map(function (s) {
+        return '<a class="source-link" href="' + s.url + '" target="_blank" rel="noopener">' + s.label + '</a>';
+      }).join('<span class="dot">•</span>');
+      return '<div class="card"><div class="rank">' + rank + '</div><div class="card-body">' +
+        '<div class="card-title">' + item.title + '</div>' +
+        '<div class="card-summary">' + item.summary + '</div>' +
+        '<div class="card-foot">' + sources + '<span class="dot">•</span><span class="date">' + item.date + '</span>' +
+        '<span class="confidence ' + confClass(item.confidence) + '">' + item.confidence + '% confidence</span></div></div></div>';
+    }
+
+    function renderList(containerId, items) {
+      var el = document.getElementById(containerId);
+      if (!items || !items.length) {
+        el.innerHTML = '<div class="empty-note">No qualifying items recorded for this section that week.</div>';
+        return;
+      }
+      el.innerHTML = items.map(function (it, i) { return cardHtml(it, i + 1); }).join('');
+    }
+
+    function renderCurrent() {
+      var latest = history[0];
+      if (!latest) return;
+      renderList('current-tools-cards', latest.tools);
+      renderList('current-learning-cards', latest.learning);
+      renderList('current-world-cards', latest.world);
+      document.getElementById('last-updated-chip').textContent = 'Last updated: ' + latest.label.replace(' (current)', '');
+    }
+
+    function renderArchiveWeek(entry) {
+      renderList('archive-tools-cards', entry.tools);
+      renderList('archive-learning-cards', entry.learning);
+      renderList('archive-world-cards', entry.world);
+      document.getElementById('archive-banner-date').textContent = entry.label.replace(' (current)', '');
+    }
+
+    function showCurrent() {
+      document.getElementById('current-view').classList.remove('hidden');
+      document.getElementById('archive-view').classList.add('hidden');
+      document.getElementById('archive-banner').classList.add('hidden');
+    }
+
+    function showArchive() {
+      document.getElementById('current-view').classList.add('hidden');
+      document.getElementById('archive-view').classList.remove('hidden');
+      document.getElementById('archive-banner').classList.remove('hidden');
+    }
+
+    function buildSelect() {
+      var select = document.getElementById('archive-select');
+      select.innerHTML = history.slice(0, MAX_WEEKS).map(function (entry, i) {
+        return '<option value="' + i + '">' + entry.label + '</option>';
+      }).join('');
+      select.addEventListener('change', function () {
+        var idx = parseInt(this.value, 10);
+        if (idx === 0) { showCurrent(); }
+        else { renderArchiveWeek(history[idx]); showArchive(); }
+      });
+    }
+
+    document.getElementById('back-to-current-btn').addEventListener('click', function () {
+      document.getElementById('archive-select').value = '0';
+      showCurrent();
+    });
+
+    renderCurrent();
+    buildSelect();
+  })();
+</script>
+
+</body>
+</html>
